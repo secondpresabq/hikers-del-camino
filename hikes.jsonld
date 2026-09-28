@@ -1,0 +1,316 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "hike": "https://hikersdelcamino.example/ns/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "date": {
+      "@id": "hike:date",
+      "@type": "xsd:date"
+    },
+    "startTime": {
+      "@id": "hike:startTime",
+      "@type": "xsd:time"
+    },
+    "hikeCode": {
+      "@id": "hike:hikeCode",
+      "@type": "xsd:string"
+    },
+    "afterward": {
+      "@id": "hike:afterward",
+      "@type": "xsd:string"
+    },
+    "directions": {
+      "@id": "hike:directions",
+      "@type": "xsd:string"
+    },
+    "placeUrl": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "routeOptions": {
+      "@id": "hike:routeOption",
+      "@container": "@set"
+    },
+    "optionType": "hike:optionType",
+    "distanceMiles": {
+      "@id": "hike:distanceMiles",
+      "@type": "xsd:decimal"
+    },
+    "elevationGainFeet": {
+      "@id": "hike:elevationGainFeet",
+      "@type": "xsd:integer"
+    },
+    "shade": {
+      "@id": "hike:shade",
+      "@type": "xsd:string"
+    },
+    "estimatedDuration": {
+      "@id": "hike:estimatedDuration",
+      "@type": "xsd:duration"
+    },
+    "difficulty": "hike:difficulty"
+  },
+  "@graph": [
+    {
+      "@id": "#hike-001",
+      "@type": "schema:Event",
+      "hikeCode": "AA",
+      "afterward": "Hikers picnic at 3 Pinon Place",
+      "directions": "Take I-40 to NM-14 North",
+      "schema:name": "Guitierrez Canyon Trail",
+      "schema:location": {
+        "@type": "schema:Place",
+        "schema:name": "Cabra Coffee",
+        "schema:address": {
+          "@type": "schema:PostalAddress",
+          "schema:streetAddress": "12216 NM-14 N",
+          "schema:addressLocality": "Cedar Crest",
+          "schema:addressRegion": "NM",
+          "schema:postalCode": "87008",
+          "schema:addressCountry": "US"
+        },
+        "schema:geo": {
+          "@type": "schema:GeoCoordinates",
+          "schema:latitude": 35.12902,
+          "schema:longitude": -106.3661
+        },
+        "placeUrl": "https://cabracoffee.com"
+      },
+      "routeOptions": [
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "shorter",
+          "schema:name": "Shorter hike",
+          "schema:description": "Up to the ridge and back.",
+          "distanceMiles": 2,
+          "elevationGainFeet": 500,
+          "shade": "Mostly shaded",
+          "estimatedDuration": "PT1H30M",
+          "difficulty": "Kinda Moderate"
+        },
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "longer",
+          "schema:name": "Longer hike",
+          "schema:description": "Figure eight hike up to the ridge, across the open space, down rocky wagon trail.",
+          "distanceMiles": 5.5,
+          "elevationGainFeet": 800,
+          "shade": "Mostly shaded",
+          "estimatedDuration": "PT3H",
+          "difficulty": "Kinda hard"
+        }
+      ],
+      "date": "2026-09-17",
+      "startTime": "08:30:00"
+    },
+    {
+      "@id": "#hike-002",
+      "@type": "schema:Event",
+      "hikeCode": "AB",
+      "afterward": "Beverages and snacks at Great Bear Brewhall",
+      "directions": "Take Tramway to Simms Park Road",
+      "schema:name": "Domingo Baca",
+      "schema:location": {
+        "@type": "schema:Place",
+        "schema:name": "Elena Gallegos Picnic Area at the end of Simms Park Road",
+        "schema:address": {
+          "@type": "schema:PostalAddress",
+          "schema:streetAddress": "7100 Tramway Blvd NE",
+          "schema:addressLocality": "Albuquerque",
+          "schema:addressRegion": "NM",
+          "schema:postalCode": "87122",
+          "schema:addressCountry": "US"
+        },
+        "schema:geo": {
+          "@type": "schema:GeoCoordinates",
+          "schema:latitude": 35.1619891,
+          "schema:longitude": -106.4705789
+        },
+        "placeUrl": "https://www.cabq.gov/parksandrecreation/open-space/lands/elena-gallegos-open-space"
+      },
+      "routeOptions": [
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "shorter",
+          "schema:name": "Shorter hike",
+          "schema:description": "Out to the Domingo Baca trailhead and back.",
+          "distanceMiles": 1.5,
+          "elevationGainFeet": 100,
+          "shade": "No shade",
+          "estimatedDuration": "PT1H",
+          "difficulty": "Kinda easy"
+        },
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "longer",
+          "schema:name": "Longer hike",
+          "schema:description": "Up to the TWA crash sight and back.",
+          "distanceMiles": 6,
+          "elevationGainFeet": 1500,
+          "shade": "No shade",
+          "estimatedDuration": "PT6H",
+          "difficulty": "Pretty hard, actually"
+        }
+      ],
+      "date": "2026-09-28",
+      "startTime": "09:30:00"
+    },
+    {
+      "@id": "#hike-003",
+      "@type": "schema:Event",
+      "hikeCode": "AC",
+      "afterward": null,
+      "directions": "Take I-40 East to Tijeras",
+      "schema:name": "Otero Canyon",
+      "schema:location": {
+        "@type": "schema:Place",
+        "schema:name": "East Mountain Library",
+        "schema:alternateName": "Tijeras Public Library",
+        "schema:address": {
+          "@type": "schema:PostalAddress",
+          "schema:streetAddress": "487 NM-333",
+          "schema:addressLocality": "Tijeras",
+          "schema:addressRegion": "NM",
+          "schema:postalCode": "87059",
+          "schema:addressCountry": "US"
+        },
+        "schema:geo": {
+          "@type": "schema:GeoCoordinates",
+          "schema:latitude": 35.0794912,
+          "schema:longitude": -106.390024
+        },
+        "placeUrl": "https://abqlibrary.org/eastmountain"
+      },
+      "routeOptions": [
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "shorter",
+          "schema:name": "Shorter hike",
+          "schema:description": "Into the Otero Canyon and back.",
+          "distanceMiles": 1.5,
+          "elevationGainFeet": 200,
+          "shade": "Partial shade",
+          "estimatedDuration": "PT1H",
+          "difficulty": "Tricky here and there"
+        },
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "longer",
+          "schema:name": "Longer hike",
+          "schema:description": "Circle trip through Otero Canyon to Air Force boundary, up the hillside, back down Blue Ribbon trail.",
+          "distanceMiles": 5,
+          "elevationGainFeet": 600,
+          "shade": "Partial shade",
+          "estimatedDuration": "PT2H30M",
+          "difficulty": "Sordof moderate-ish"
+        }
+      ],
+      "date": "2026-11-14",
+      "startTime": "09:30:00"
+    },
+    {
+      "@id": "#hike-004",
+      "@type": "schema:Event",
+      "hikeCode": "AD",
+      "afterward": null,
+      "directions": "Take Central Avenue east past Tramway, look for parking lot on the right-hand side of the road",
+      "schema:name": "Route 66 Open Space",
+      "schema:location": {
+        "@type": "schema:Place",
+        "schema:name": "Route 66 Open Space Trailhead",
+        "schema:address": {
+          "@type": "schema:PostalAddress",
+          "schema:streetAddress": "14482 I-40 Frontage Rd NE",
+          "schema:addressLocality": "Albuquerque",
+          "schema:addressRegion": "NM",
+          "schema:postalCode": "87123",
+          "schema:addressCountry": "US"
+        },
+        "schema:geo": {
+          "@type": "schema:GeoCoordinates",
+          "schema:latitude": 35.064311,
+          "schema:longitude": -106.48726
+        },
+        "placeUrl": "https://www.cabq.gov/parksandrecreation/open-space/lands/tijeras-cultural-corridor"
+      },
+      "routeOptions": [
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "shorter",
+          "schema:name": "Shorter hike",
+          "schema:description": "Out to the beginning of the climb.",
+          "distanceMiles": 1.5,
+          "elevationGainFeet": 10,
+          "shade": "Little shade",
+          "estimatedDuration": "PT1H",
+          "difficulty": "Kinda easy"
+        },
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "longer",
+          "schema:name": "Longer hike",
+          "schema:description": "Circle hike up around and back.",
+          "distanceMiles": 3,
+          "elevationGainFeet": 500,
+          "shade": "Little shade",
+          "estimatedDuration": "PT2H",
+          "difficulty": "Kinda moderate"
+        }
+      ],
+      "date": "2026-12-12",
+      "startTime": "09:00:00"
+    },
+    {
+      "@id": "#hike-005",
+      "@type": "schema:Event",
+      "hikeCode": "AA",
+      "afterward": null,
+      "directions": "Take I-40 East to Tijeras, then NM-14 North",
+      "schema:name": "Guitierrez Canyon Trail",
+      "schema:location": {
+        "@type": "schema:Place",
+        "schema:name": "Cabra Coffee",
+        "schema:address": {
+          "@type": "schema:PostalAddress",
+          "schema:streetAddress": "12216 NM-14 N",
+          "schema:addressLocality": "Cedar Crest",
+          "schema:addressRegion": "NM",
+          "schema:postalCode": "87008",
+          "schema:addressCountry": "US"
+        },
+        "schema:geo": {
+          "@type": "schema:GeoCoordinates",
+          "schema:latitude": 35.12902,
+          "schema:longitude": -106.3661
+        },
+        "placeUrl": "https://cabracoffee.com"
+      },
+      "routeOptions": [
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "shorter",
+          "schema:name": "Shorter hike",
+          "schema:description": "Up to the ridge and back.",
+          "distanceMiles": 2,
+          "elevationGainFeet": 500,
+          "shade": "Mostly shaded",
+          "estimatedDuration": "PT1H30M",
+          "difficulty": "Kinda Moderate"
+        },
+        {
+          "@type": "hike:HikeOption",
+          "optionType": "longer",
+          "schema:name": "Longer hike",
+          "schema:description": "Figure eight hike up to the ridge, across the open space, down rocky wagon trail.",
+          "distanceMiles": 5.5,
+          "elevationGainFeet": 800,
+          "shade": "Mostly shaded",
+          "estimatedDuration": "PT3H",
+          "difficulty": "Kinda hard"
+        }
+      ],
+      "date": "2027-04-17",
+      "startTime": "10:30:00"
+    }
+  ]
+}
