@@ -1964,6 +1964,9 @@
       if (Number.isNaN(parsed.getTime())) return "";
 
       const monthKey = hike.date.slice(0, 7);
+      const monthlyTotal = hikes
+        .filter((candidate) => candidate.date.slice(0, 7) === monthKey)
+        .length;
       const monthlyNumber = hikes
         .slice(0, index + 1)
         .filter((candidate) => candidate.date.slice(0, 7) === monthKey)
@@ -1972,8 +1975,10 @@
         month: "long",
         year: "numeric"
       }).format(parsed);
+      if (monthlyTotal === 1) return `${monthYear} Hike`;
+
       const bonus = monthlyNumber > 1 ? " — Bonus hike!" : "";
-      return `${monthYear} · Hike #${monthlyNumber}${bonus}`;
+      return `${monthYear} Hike ${monthlyNumber}${bonus}`;
     };
 
     const renderHike = (index) => {
