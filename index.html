@@ -356,6 +356,16 @@
       line-height: 1.15;
     }
 
+    .hike-month-label {
+      margin: 0 0 0.45rem;
+      color: #667060;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.055em;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
     .hike-title-row {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -1949,12 +1959,33 @@
         .length;
     };
 
+    const monthlyHikeLabel = (hike, index) => {
+      const parsed = new Date(`${hike.date}T00:00:00`);
+      if (Number.isNaN(parsed.getTime())) return "";
+
+      const monthKey = hike.date.slice(0, 7);
+      const monthlyNumber = hikes
+        .slice(0, index + 1)
+        .filter((candidate) => candidate.date.slice(0, 7) === monthKey)
+        .length;
+      const monthYear = new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        year: "numeric"
+      }).format(parsed);
+      const bonus = monthlyNumber > 1 ? " — Bonus hike!" : "";
+      return `${monthYear} · Hike #${monthlyNumber}${bonus}`;
+    };
+
     const renderHike = (index) => {
       const hike = hikes[index];
       if (!hike) return;
 
       const card = document.createElement("article");
       card.className = "hike-card";
+
+      const monthLabel = document.createElement("p");
+      monthLabel.className = "hike-month-label";
+      monthLabel.textContent = monthlyHikeLabel(hike, index);
 
       const title = document.createElement("h3");
       title.className = "hike-title";
@@ -1978,7 +2009,7 @@
       const verseCard = createVerseCard(hike.bibleVerse);
       const prayerCard = createPrayerCard(hike.prayer);
 
-      card.append(titleRow, details, location);
+      card.append(monthLabel, titleRow, details, location);
       if (directions) card.append(directions);
       if (routeOptions) card.append(routeOptions);
       if (afterward) card.append(afterward);
