@@ -23,6 +23,25 @@
       "@id": "hike:directions",
       "@type": "xsd:string"
     },
+    "bibleVerse": {
+      "@id": "hike:bibleVerse",
+      "@container": "@set"
+    },
+    "language": {
+      "@id": "schema:inLanguage"
+    },
+    "reference": {
+      "@id": "hike:bibleReference",
+      "@type": "xsd:string"
+    },
+    "verseUrl": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "prayer": {
+      "@id": "hike:prayer",
+      "@container": "@language"
+    },
     "placeUrl": {
       "@id": "schema:url",
       "@type": "@id"
@@ -57,6 +76,24 @@
       "hikeCode": "AA",
       "afterward": "Hikers picnic at 3 Pinon Place",
       "directions": "Take I-40 to NM-14 North",
+      "bibleVerse": [
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "en",
+          "reference": "John 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+        },
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "es",
+          "reference": "Juan 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+        }
+      ],
+      "prayer": {
+        "en": "Thank you, Lord. Amen.",
+        "es": "Gracias a Dios. Amén."
+      },
       "schema:name": "Guitierrez Canyon Trail",
       "schema:location": {
         "@type": "schema:Place",
@@ -109,6 +146,24 @@
       "hikeCode": "AB",
       "afterward": "Beverages and snacks at Great Bear Brewhall",
       "directions": "Take Tramway to Simms Park Road",
+      "bibleVerse": [
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "en",
+          "reference": "John 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+        },
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "es",
+          "reference": "Juan 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+        }
+      ],
+      "prayer": {
+        "en": "Thank you, Lord. Amen.",
+        "es": "Gracias a Dios. Amén."
+      },
       "schema:name": "Domingo Baca",
       "schema:location": {
         "@type": "schema:Place",
@@ -161,6 +216,24 @@
       "hikeCode": "AC",
       "afterward": null,
       "directions": "Take I-40 East to Tijeras",
+      "bibleVerse": [
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "en",
+          "reference": "John 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+        },
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "es",
+          "reference": "Juan 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+        }
+      ],
+      "prayer": {
+        "en": "Thank you, Lord. Amen.",
+        "es": "Gracias a Dios. Amén."
+      },
       "schema:name": "Otero Canyon",
       "schema:location": {
         "@type": "schema:Place",
@@ -214,6 +287,24 @@
       "hikeCode": "AD",
       "afterward": null,
       "directions": "Take Central Avenue east past Tramway, look for parking lot on the right-hand side of the road",
+      "bibleVerse": [
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "en",
+          "reference": "John 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+        },
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "es",
+          "reference": "Juan 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+        }
+      ],
+      "prayer": {
+        "en": "Thank you, Lord. Amen.",
+        "es": "Gracias a Dios. Amén."
+      },
       "schema:name": "Route 66 Open Space",
       "schema:location": {
         "@type": "schema:Place",
@@ -266,6 +357,24 @@
       "hikeCode": "AA",
       "afterward": null,
       "directions": "Take I-40 East to Tijeras, then NM-14 North",
+      "bibleVerse": [
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "en",
+          "reference": "John 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+        },
+        {
+          "@type": "hike:BibleGatewayLink",
+          "language": "es",
+          "reference": "Juan 1:1-4",
+          "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+        }
+      ],
+      "prayer": {
+        "en": "Thank you, Lord. Amen.",
+        "es": "Gracias a Dios. Amén."
+      },
       "schema:name": "Guitierrez Canyon Trail",
       "schema:location": {
         "@type": "schema:Place",

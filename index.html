@@ -711,6 +711,63 @@
       line-height: 1.5;
     }
 
+    .spiritual-card {
+      margin-top: 0.85rem;
+      padding: clamp(1rem, 3vw, 1.4rem);
+      border-radius: 0.9rem;
+      background: rgba(217, 222, 211, 0.64);
+    }
+
+    .spiritual-card-label {
+      margin: 0 0 0.65rem;
+      color: #667060;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+    }
+
+    .spiritual-card-content {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .spiritual-entry {
+      margin: 0;
+      color: #303a32;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .spiritual-entry + .spiritual-entry {
+      padding-top: 0.6rem;
+      border-top: 1px solid rgba(95, 104, 92, 0.22);
+    }
+
+    .spiritual-language {
+      display: block;
+      margin-bottom: 0.15rem;
+      color: #667060;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .verse-link {
+      color: #355d78;
+      font-weight: 750;
+      text-decoration-thickness: 0.09em;
+      text-underline-offset: 0.18em;
+    }
+
+    .verse-link:hover { color: #27485f; }
+    .verse-link:focus-visible {
+      outline: 3px solid #5f685c;
+      outline-offset: 3px;
+      border-radius: 0.2rem;
+    }
+
     .data-error {
       color: #6a2f2f;
       font-weight: 650;
@@ -1013,6 +1070,25 @@
           "@id": "hike:directions",
           "@type": "xsd:string"
         },
+        "bibleVerse": {
+          "@id": "hike:bibleVerse",
+          "@container": "@set"
+        },
+        "language": {
+          "@id": "schema:inLanguage"
+        },
+        "reference": {
+          "@id": "hike:bibleReference",
+          "@type": "xsd:string"
+        },
+        "verseUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "prayer": {
+          "@id": "hike:prayer",
+          "@container": "@language"
+        },
         "placeUrl": {
           "@id": "schema:url",
           "@type": "@id"
@@ -1047,6 +1123,24 @@
           "hikeCode": "AA",
           "afterward": "Hikers picnic at 3 Pinon Place",
           "directions": "Take I-40 to NM-14 North",
+          "bibleVerse": [
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "en",
+              "reference": "John 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+            },
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "es",
+              "reference": "Juan 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+            }
+          ],
+          "prayer": {
+            "en": "Thank you, Lord. Amen.",
+            "es": "Gracias a Dios. Amén."
+          },
           "schema:name": "Guitierrez Canyon Trail",
           "schema:location": {
             "@type": "schema:Place",
@@ -1099,6 +1193,24 @@
           "hikeCode": "AB",
           "afterward": "Beverages and snacks at Great Bear Brewhall",
           "directions": "Take Tramway to Simms Park Road",
+          "bibleVerse": [
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "en",
+              "reference": "John 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+            },
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "es",
+              "reference": "Juan 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+            }
+          ],
+          "prayer": {
+            "en": "Thank you, Lord. Amen.",
+            "es": "Gracias a Dios. Amén."
+          },
           "schema:name": "Domingo Baca",
           "schema:location": {
             "@type": "schema:Place",
@@ -1151,6 +1263,24 @@
           "hikeCode": "AC",
           "afterward": null,
           "directions": "Take I-40 East to Tijeras",
+          "bibleVerse": [
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "en",
+              "reference": "John 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+            },
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "es",
+              "reference": "Juan 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+            }
+          ],
+          "prayer": {
+            "en": "Thank you, Lord. Amen.",
+            "es": "Gracias a Dios. Amén."
+          },
           "schema:name": "Otero Canyon",
           "schema:location": {
             "@type": "schema:Place",
@@ -1204,6 +1334,24 @@
           "hikeCode": "AD",
           "afterward": null,
           "directions": "Take Central Avenue east past Tramway, look for parking lot on the right-hand side of the road",
+          "bibleVerse": [
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "en",
+              "reference": "John 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+            },
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "es",
+              "reference": "Juan 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+            }
+          ],
+          "prayer": {
+            "en": "Thank you, Lord. Amen.",
+            "es": "Gracias a Dios. Amén."
+          },
           "schema:name": "Route 66 Open Space",
           "schema:location": {
             "@type": "schema:Place",
@@ -1256,6 +1404,24 @@
           "hikeCode": "AA",
           "afterward": null,
           "directions": "Take I-40 East to Tijeras, then NM-14 North",
+          "bibleVerse": [
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "en",
+              "reference": "John 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=NASB"
+            },
+            {
+              "@type": "hike:BibleGatewayLink",
+              "language": "es",
+              "reference": "Juan 1:1-4",
+              "verseUrl": "https://www.biblegateway.com/passage/?search=John%201%3A1-4&version=RVR1995"
+            }
+          ],
+          "prayer": {
+            "en": "Thank you, Lord. Amen.",
+            "es": "Gracias a Dios. Amén."
+          },
           "schema:name": "Guitierrez Canyon Trail",
           "schema:location": {
             "@type": "schema:Place",
@@ -1580,6 +1746,86 @@
       return card;
     };
 
+    const languageLabel = (language) => language === "es" ? "Español" : "English";
+
+    const createVerseCard = (verses) => {
+      if (!Array.isArray(verses) || !verses.length) return null;
+
+      const validVerses = verses.filter((verse) =>
+        verse && verse.verseUrl && verse.reference
+      );
+      if (!validVerses.length) return null;
+
+      const card = document.createElement("section");
+      card.className = "spiritual-card verse-card";
+      card.setAttribute("aria-label", "Bible verse");
+
+      const label = document.createElement("p");
+      label.className = "spiritual-card-label";
+      label.textContent = "Verse";
+
+      const content = document.createElement("div");
+      content.className = "spiritual-card-content";
+
+      validVerses.forEach((verse) => {
+        const entry = document.createElement("p");
+        entry.className = "spiritual-entry";
+
+        const language = document.createElement("span");
+        language.className = "spiritual-language";
+        language.textContent = languageLabel(verse.language);
+
+        const link = document.createElement("a");
+        link.className = "verse-link";
+        link.href = verse.verseUrl;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        const version = new URL(verse.verseUrl, window.location.href).searchParams.get("version");
+        link.textContent = version ? `${verse.reference} (${version})` : verse.reference;
+
+        entry.append(language, link);
+        content.append(entry);
+      });
+
+      card.append(label, content);
+      return card;
+    };
+
+    const createPrayerCard = (prayer) => {
+      if (!prayer || typeof prayer !== "object") return null;
+
+      const prayers = ["en", "es"]
+        .filter((language) => typeof prayer[language] === "string" && prayer[language].trim())
+        .map((language) => ({ language, text: prayer[language].trim() }));
+      if (!prayers.length) return null;
+
+      const card = document.createElement("section");
+      card.className = "spiritual-card prayer-card";
+      card.setAttribute("aria-label", "Prayer");
+
+      const label = document.createElement("p");
+      label.className = "spiritual-card-label";
+      label.textContent = "Prayer";
+
+      const content = document.createElement("div");
+      content.className = "spiritual-card-content";
+
+      prayers.forEach(({ language: languageCode, text }) => {
+        const entry = document.createElement("p");
+        entry.className = "spiritual-entry";
+
+        const language = document.createElement("span");
+        language.className = "spiritual-language";
+        language.textContent = languageLabel(languageCode);
+
+        entry.append(language, document.createTextNode(text));
+        content.append(entry);
+      });
+
+      card.append(label, content);
+      return card;
+    };
+
     const createAfterwardIndicator = (value) => {
       const hasAfterward = value !== null && value !== undefined;
       const indicator = document.createElement(hasAfterward ? "button" : "span");
@@ -1729,11 +1975,15 @@
       const directions = createDirections(hike.directions);
       const routeOptions = createRouteOptions(hike.routeOptions);
       const afterward = createAfterward(hike.afterward);
+      const verseCard = createVerseCard(hike.bibleVerse);
+      const prayerCard = createPrayerCard(hike.prayer);
 
       card.append(titleRow, details, location);
       if (directions) card.append(directions);
       if (routeOptions) card.append(routeOptions);
       if (afterward) card.append(afterward);
+      if (verseCard) card.append(verseCard);
+      if (prayerCard) card.append(prayerCard);
       hikeContent.replaceChildren(card);
       hikeContent.scrollTop = 0;
       const occurrenceLabel = `${spanishOrdinal(hikeOccurrence(hike, index)).toLowerCase()} vez`;
