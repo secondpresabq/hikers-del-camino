@@ -65,10 +65,10 @@
     }
 
     .info-trigger,
-    .reflection-trigger {
+    .reflection-trigger,
+    .language-switch {
       position: absolute;
       z-index: 2;
-      top: max(1rem, env(safe-area-inset-top));
       display: grid;
       place-items: center;
       box-sizing: border-box;
@@ -89,16 +89,57 @@
       touch-action: manipulation;
     }
 
+    .info-trigger,
+    .reflection-trigger {
+      top: max(1rem, env(safe-area-inset-top));
+    }
+
     .info-trigger { left: max(1rem, env(safe-area-inset-left)); }
     .reflection-trigger { right: max(1rem, env(safe-area-inset-right)); }
 
+    .language-switch {
+      bottom: max(1rem, env(safe-area-inset-bottom));
+      left: max(1rem, env(safe-area-inset-left));
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .language-option {
+      display: grid;
+      place-items: center;
+      align-self: stretch;
+      width: 100%;
+      min-width: 0;
+      min-height: 3rem;
+      padding: 0.75rem 0.5rem;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      letter-spacing: inherit;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .language-option + .language-option {
+      border-left: 1px solid rgba(225, 230, 219, 0.52);
+    }
+
+    .language-option[aria-pressed="true"] {
+      background: rgba(245, 246, 241, 0.2);
+      box-shadow: inset 0 -0.2rem 0 #f5f6f1;
+    }
+
     .info-trigger:hover,
-    .reflection-trigger:hover {
+    .reflection-trigger:hover,
+    .language-switch:hover {
       background: rgba(66, 77, 66, 0.96);
     }
 
     .info-trigger:focus-visible,
     .reflection-trigger:focus-visible,
+    .language-option:focus-visible,
     .dialog-close:focus-visible,
     .carousel-control:focus-visible {
       outline: 3px solid #f5f6f1;
@@ -1005,6 +1046,11 @@
       aria-expanded="false"
     >Reflection</button>
 
+    <div class="language-switch" id="language-switch" role="group" aria-label="Language / Idioma">
+      <button class="language-option" id="language-en" type="button" aria-pressed="true">EN</button>
+      <button class="language-option" id="language-es" type="button" aria-pressed="false">ES</button>
+    </div>
+
     <dialog class="hike-dialog" id="hike-info" aria-labelledby="hike-info-title">
       <header class="dialog-header">
         <h2 class="dialog-title" id="hike-info-title" aria-live="polite">Hike information</h2>
@@ -1035,7 +1081,7 @@
       </header>
       <div class="reflection-content">
         <div class="reflection-quotes">
-          <blockquote class="reflection-quote">
+          <blockquote class="reflection-quote" lang="en">
             <p class="reflection-verse"><em>For the beauty of the earth,<br>
               For the glory of the skies,<br>
               For the love which from our birth<br>
@@ -1044,7 +1090,7 @@
               This our hymn of grateful praise.</em></p>
             <footer class="reflection-attribution">— <strong>Folliott Sandford Pierpoint, “For the Beauty of the Earth” (1864)</strong></footer>
           </blockquote>
-          <blockquote class="reflection-quote">
+          <blockquote class="reflection-quote" lang="en">
             <p class="reflection-verse"><em>How many are Your works, O LORD;<br>
               in wisdom You have made them all;<br>
               the earth is full of Your creations.</em></p>
@@ -1497,15 +1543,126 @@
     const previousButton = document.getElementById("previous-hike");
     const nextButton = document.getElementById("next-hike");
     const hikePosition = document.getElementById("hike-position");
+    const languageSwitch = document.getElementById("language-switch");
+    const englishButton = document.getElementById("language-en");
+    const spanishButton = document.getElementById("language-es");
+    const messages = {
+      en: {
+        hikes: "Hikes",
+        reflection: "Reflection",
+        languageControl: "Language",
+        imageAlt: "A quiet sage-green desert trail leading toward mountains, with a weathered Hikers del Camino trail sign.",
+        pageDescription: "A mobile-friendly home for Hikers del Camino.",
+        hikeInformation: "Hike information",
+        close: "Close",
+        hikeNavigation: "Hike navigation",
+        previousHike: "Show previous hike",
+        nextHike: "Show next hike",
+        today: "Today!",
+        nextStatus: "Next hike!",
+        futureStatus: "Future hike",
+        pastStatus: "Past hike",
+        date: "Date",
+        startTime: "Start time",
+        meetingPoint: "Meeting point",
+        openMap: "Open map",
+        locationDetails: "Location details",
+        directions: "Driving directions & road notes",
+        routeOptions: "Route options",
+        shorterRoute: "Shorter hike",
+        longerRoute: "Longer hike",
+        routeOption: "Hike option",
+        distance: "Distance",
+        elevationGain: "Elevation gain",
+        estimatedTime: "Estimated time",
+        shade: "Shade",
+        difficulty: "Difficulty",
+        afterward: "Afterward",
+        afterwardPlanned: "Afterward planned",
+        afterwardDetails: "Afterward planned; view details",
+        noAfterward: "No afterward listed",
+        verse: "Verse",
+        bibleVerse: "Bible verse",
+        prayer: "Prayer",
+        bonusHike: "Bonus hike!",
+        hike: "Hike",
+        of: "of",
+        unavailable: "Hike information is temporarily unavailable.",
+        noHikes: "No hikes available",
+        day: "day",
+        days: "days",
+        hour: "hr",
+        minute: "min",
+        second: "sec"
+      },
+      es: {
+        hikes: "Caminatas",
+        reflection: "Reflexión",
+        languageControl: "Idioma",
+        imageAlt: "Un tranquilo sendero desértico en tonos verde salvia conduce hacia las montañas, junto a un letrero desgastado de Hikers del Camino.",
+        pageDescription: "Un espacio para Hikers del Camino diseñado para dispositivos móviles.",
+        hikeInformation: "Información de la caminata",
+        close: "Cerrar",
+        hikeNavigation: "Navegación de caminatas",
+        previousHike: "Mostrar la caminata anterior",
+        nextHike: "Mostrar la caminata siguiente",
+        today: "¡Hoy!",
+        nextStatus: "¡Próxima caminata!",
+        futureStatus: "Caminata programada",
+        pastStatus: "Caminata pasada",
+        date: "Fecha",
+        startTime: "Hora de inicio",
+        meetingPoint: "Punto de encuentro",
+        openMap: "Abrir mapa",
+        locationDetails: "Detalles del lugar",
+        directions: "Indicaciones para llegar y notas sobre el camino",
+        routeOptions: "Opciones de ruta",
+        shorterRoute: "Ruta corta",
+        longerRoute: "Ruta larga",
+        routeOption: "Opción de ruta",
+        distance: "Distancia",
+        elevationGain: "Desnivel positivo",
+        estimatedTime: "Tiempo estimado",
+        shade: "Sombra",
+        difficulty: "Dificultad",
+        afterward: "Después de la caminata",
+        afterwardPlanned: "Hay una actividad después de la caminata",
+        afterwardDetails: "Hay una actividad después de la caminata; ver detalles",
+        noAfterward: "No hay una actividad posterior",
+        verse: "Versículo",
+        bibleVerse: "Versículo bíblico",
+        prayer: "Oración",
+        bonusHike: "¡Caminata adicional!",
+        hike: "Caminata",
+        of: "de",
+        unavailable: "La información de la caminata no está disponible temporalmente.",
+        noHikes: "No hay caminatas disponibles",
+        day: "día",
+        days: "días",
+        hour: "h",
+        minute: "min",
+        second: "s"
+      }
+    };
+    const storedLanguage = (() => {
+      try { return localStorage.getItem("hikersLanguage"); }
+      catch { return null; }
+    })();
+    let currentLanguage = storedLanguage === "en" || storedLanguage === "es"
+      ? storedLanguage
+      : (navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en";
     let hikes = [];
     let currentHikeIndex = 0;
     let occurrencePopoverPinned = false;
+
+    const translate = (key) => messages[currentLanguage]?.[key] ?? messages.en[key] ?? key;
+    const currentLocale = () => currentLanguage === "es" ? "es-MX" : "en-US";
 
     const formatDate = (value) => {
       const parsed = new Date(`${value}T00:00:00`);
       return Number.isNaN(parsed.getTime())
         ? value
-        : new Intl.DateTimeFormat(undefined, {
+        : new Intl.DateTimeFormat(currentLocale(), {
             weekday: "long",
             year: "numeric",
             month: "long",
@@ -1518,7 +1675,7 @@
       const parsed = new Date(1970, 0, 1, hours, minutes);
       return Number.isNaN(parsed.getTime())
         ? value
-        : new Intl.DateTimeFormat(undefined, { timeStyle: "short" }).format(parsed);
+        : new Intl.DateTimeFormat(currentLocale(), { timeStyle: "short" }).format(parsed);
     };
 
     const formatCompactDate = (value) => {
@@ -1532,20 +1689,20 @@
       if (!match) return value;
 
       const units = [
-        [match[1], "day"],
-        [match[2], "hr"],
-        [match[3], "min"],
-        [match[4], "sec"]
+        [match[1], Number(match[1]) === 1 ? translate("day") : translate("days")],
+        [match[2], translate("hour")],
+        [match[3], translate("minute")],
+        [match[4], translate("second")]
       ];
       return units
         .filter(([amount]) => amount && Number(amount) !== 0)
-        .map(([amount, unit]) => `${Number(amount)} ${unit}${unit === "day" && Number(amount) !== 1 ? "s" : ""}`)
+        .map(([amount, unit]) => `${Number(amount)} ${unit}`)
         .join(" ");
     };
 
     const formatMeasurement = (value, unit, maximumFractionDigits = 0) => {
       if (!Number.isFinite(value)) return "";
-      const number = new Intl.NumberFormat(undefined, { maximumFractionDigits }).format(value);
+      const number = new Intl.NumberFormat(currentLocale(), { maximumFractionDigits }).format(value);
       return `${number} ${unit}`;
     };
 
@@ -1581,11 +1738,11 @@
 
       const label = document.createElement("p");
       label.className = "location-label";
-      label.textContent = "Meeting point";
+      label.textContent = translate("meetingPoint");
 
       const name = document.createElement("h4");
       name.className = "location-name";
-      name.textContent = location["schema:name"] || "Meeting point";
+      name.textContent = location["schema:name"] || translate("meetingPoint");
       section.append(label, name);
 
       const addressData = location["schema:address"];
@@ -1638,12 +1795,12 @@
           chooser.className = "map-chooser";
 
           const summary = document.createElement("summary");
-          summary.textContent = "Open map";
+          summary.textContent = translate("openMap");
 
           const options = document.createElement("div");
           options.className = "map-options";
           const encodedCoordinates = encodeURIComponent(`${latitude},${longitude}`);
-          const encodedName = encodeURIComponent(location["schema:name"] || "Meeting point");
+          const encodedName = encodeURIComponent(location["schema:name"] || translate("meetingPoint"));
           options.append(
             createLocationLink("Apple Maps", `https://maps.apple.com/?ll=${latitude},${longitude}&q=${encodedName}`),
             createLocationLink("Google Maps", `https://www.google.com/maps/search/?api=1&query=${encodedCoordinates}`),
@@ -1654,7 +1811,7 @@
         }
 
         if (placeUrl) {
-          actions.append(createLocationLink("Location details", placeUrl, { newTab: true }));
+          actions.append(createLocationLink(translate("locationDetails"), placeUrl, { newTab: true }));
         }
         section.append(actions);
       }
@@ -1669,7 +1826,7 @@
       disclosure.className = "directions-card";
 
       const summary = document.createElement("summary");
-      summary.textContent = "Driving directions & road notes";
+      summary.textContent = translate("directions");
 
       const text = document.createElement("p");
       text.className = "directions-text";
@@ -1684,7 +1841,7 @@
 
       const section = document.createElement("section");
       section.className = "route-options";
-      section.setAttribute("aria-label", "Route options");
+      section.setAttribute("aria-label", translate("routeOptions"));
 
       const grid = document.createElement("div");
       grid.className = "route-options-grid";
@@ -1707,7 +1864,11 @@
 
         const title = document.createElement("h5");
         title.className = "route-option-title";
-        title.textContent = option["schema:name"] || option.optionType || "Hike option";
+        title.textContent = option.optionType === "shorter"
+          ? translate("shorterRoute")
+          : option.optionType === "longer"
+            ? translate("longerRoute")
+            : option["schema:name"] || option.optionType || translate("routeOption");
 
         const description = document.createElement("p");
         description.className = "route-option-description";
@@ -1718,11 +1879,11 @@
         const facts = document.createElement("dl");
         facts.className = "route-option-facts";
         const factItems = [
-          createOptionFact("Distance", formatMeasurement(option.distanceMiles, "mi", 1)),
-          createOptionFact("Elevation gain", formatMeasurement(option.elevationGainFeet, "ft")),
-          createOptionFact("Estimated time", formatDuration(option.estimatedDuration)),
-          createOptionFact("Shade", option.shade || ""),
-          createOptionFact("Difficulty", option.difficulty || "", true)
+          createOptionFact(translate("distance"), formatMeasurement(option.distanceMiles, "mi", 1)),
+          createOptionFact(translate("elevationGain"), formatMeasurement(option.elevationGainFeet, "ft")),
+          createOptionFact(translate("estimatedTime"), formatDuration(option.estimatedDuration)),
+          createOptionFact(translate("shade"), option.shade || ""),
+          createOptionFact(translate("difficulty"), option.difficulty || "", true)
         ].filter(Boolean);
         if (factItems.length) {
           facts.append(...factItems);
@@ -1742,11 +1903,11 @@
       const card = document.createElement("section");
       card.className = "afterward-card";
       card.id = "afterward-card";
-      card.setAttribute("aria-label", "Afterward");
+      card.setAttribute("aria-label", translate("afterward"));
 
       const label = document.createElement("p");
       label.className = "afterward-label";
-      label.textContent = "Afterward";
+      label.textContent = translate("afterward");
 
       const text = document.createElement("p");
       text.className = "afterward-text";
@@ -1768,11 +1929,11 @@
 
       const card = document.createElement("section");
       card.className = "spiritual-card verse-card";
-      card.setAttribute("aria-label", "Bible verse");
+      card.setAttribute("aria-label", translate("bibleVerse"));
 
       const label = document.createElement("p");
       label.className = "spiritual-card-label";
-      label.textContent = "Verse";
+      label.textContent = translate("verse");
 
       const content = document.createElement("div");
       content.className = "spiritual-card-content";
@@ -1784,12 +1945,14 @@
         const language = document.createElement("span");
         language.className = "spiritual-language";
         language.textContent = languageLabel(verse.language);
+        language.lang = verse.language;
 
         const link = document.createElement("a");
         link.className = "verse-link";
         link.href = verse.verseUrl;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
+        link.lang = verse.language;
         const version = new URL(verse.verseUrl, window.location.href).searchParams.get("version");
         link.textContent = version ? `${verse.reference} (${version})` : verse.reference;
 
@@ -1811,11 +1974,11 @@
 
       const card = document.createElement("section");
       card.className = "spiritual-card prayer-card";
-      card.setAttribute("aria-label", "Prayer");
+      card.setAttribute("aria-label", translate("prayer"));
 
       const label = document.createElement("p");
       label.className = "spiritual-card-label";
-      label.textContent = "Prayer";
+      label.textContent = translate("prayer");
 
       const content = document.createElement("div");
       content.className = "spiritual-card-content";
@@ -1827,8 +1990,12 @@
         const language = document.createElement("span");
         language.className = "spiritual-language";
         language.textContent = languageLabel(languageCode);
+        language.lang = languageCode;
 
-        entry.append(language, document.createTextNode(text));
+        const prayerText = document.createElement("span");
+        prayerText.lang = languageCode;
+        prayerText.textContent = text;
+        entry.append(language, prayerText);
         content.append(entry);
       });
 
@@ -1840,12 +2007,12 @@
       const hasAfterward = value !== null && value !== undefined;
       const indicator = document.createElement(hasAfterward ? "button" : "span");
       const label = hasAfterward
-        ? "Afterward planned; view details"
-        : "No afterward listed";
+        ? translate("afterwardDetails")
+        : translate("noAfterward");
 
       indicator.className = `afterward-indicator afterward-indicator--${hasAfterward ? "active" : "inactive"}`;
       indicator.setAttribute("aria-label", label);
-      indicator.dataset.tooltip = hasAfterward ? "Afterward planned" : "No afterward listed";
+      indicator.dataset.tooltip = hasAfterward ? translate("afterwardPlanned") : translate("noAfterward");
 
       if (hasAfterward) {
         indicator.type = "button";
@@ -1908,11 +2075,11 @@
       const today = localDateKey(new Date());
       const hike = hikes[index];
 
-      if (hike.date === today) return "Today!";
-      if (hike.date < today) return "Past hike";
+      if (hike.date === today) return "today";
+      if (hike.date < today) return "pastStatus";
 
       const nextFutureIndex = hikes.findIndex((candidate) => candidate.date > today);
-      return index === nextFutureIndex ? "Next hike!" : "Future hike";
+      return index === nextFutureIndex ? "nextStatus" : "futureStatus";
     };
 
     const spanishOrdinal = (number) => {
@@ -1971,14 +2138,19 @@
         .slice(0, index + 1)
         .filter((candidate) => candidate.date.slice(0, 7) === monthKey)
         .length;
-      const monthYear = new Intl.DateTimeFormat("en-US", {
+      const monthYear = new Intl.DateTimeFormat(currentLocale(), {
         month: "long",
         year: "numeric"
       }).format(parsed);
-      if (monthlyTotal === 1) return `${monthYear} Hike`;
+      if (currentLanguage === "es") {
+        if (monthlyTotal === 1) return `${translate("hike")} de ${monthYear}`;
+        const bonus = monthlyNumber > 1 ? ` — ${translate("bonusHike")}` : "";
+        return `${translate("hike")} ${monthlyNumber} de ${monthYear}${bonus}`;
+      }
+      if (monthlyTotal === 1) return `${monthYear} ${translate("hike")}`;
 
-      const bonus = monthlyNumber > 1 ? " — Bonus hike!" : "";
-      return `${monthYear} Hike ${monthlyNumber}${bonus}`;
+      const bonus = monthlyNumber > 1 ? ` — ${translate("bonusHike")}` : "";
+      return `${monthYear} ${translate("hike")} ${monthlyNumber}${bonus}`;
     };
 
     const renderHike = (index) => {
@@ -2003,8 +2175,8 @@
       const details = document.createElement("dl");
       details.className = "hike-details";
       details.append(
-        createDetail("Date", formatDate(hike.date)),
-        createDetail("Start time", formatTime(hike.startTime))
+        createDetail(translate("date"), formatDate(hike.date)),
+        createDetail(translate("startTime"), formatTime(hike.startTime))
       );
 
       const location = createLocation(hike["schema:location"]);
@@ -2076,17 +2248,46 @@
       occurrencePopover.hidden = true;
       occurrenceDisplay.setAttribute("aria-expanded", "false");
 
-      const status = hikeStatus(index);
-      dialogTitle.textContent = status;
-      dialogTitle.classList.toggle("dialog-title--today", status === "Today!");
-      dialogTitle.classList.toggle("dialog-title--next", status === "Next hike!");
-      dialogTitle.classList.toggle("dialog-title--future", status === "Future hike");
-      hikePosition.textContent = `${index + 1} of ${hikes.length}`;
+      const statusKey = hikeStatus(index);
+      dialogTitle.textContent = translate(statusKey);
+      dialogTitle.classList.toggle("dialog-title--today", statusKey === "today");
+      dialogTitle.classList.toggle("dialog-title--next", statusKey === "nextStatus");
+      dialogTitle.classList.toggle("dialog-title--future", statusKey === "futureStatus");
+      hikePosition.textContent = `${index + 1} ${translate("of")} ${hikes.length}`;
       previousButton.disabled = index === 0;
       nextButton.disabled = index === hikes.length - 1;
       previousButton.hidden = index === 0;
       nextButton.hidden = index === hikes.length - 1;
     };
+
+    const updateStaticInterface = () => {
+      document.documentElement.lang = currentLanguage;
+      infoButton.textContent = translate("hikes");
+      reflectionButton.textContent = translate("reflection");
+      closeButton.textContent = translate("close");
+      reflectionCloseButton.textContent = translate("close");
+      document.getElementById("reflection-title").textContent = translate("reflection");
+      document.querySelector(".carousel-footer").setAttribute("aria-label", translate("hikeNavigation"));
+      previousButton.setAttribute("aria-label", translate("previousHike"));
+      nextButton.setAttribute("aria-label", translate("nextHike"));
+      languageSwitch.setAttribute("aria-label", translate("languageControl"));
+      englishButton.setAttribute("aria-pressed", String(currentLanguage === "en"));
+      spanishButton.setAttribute("aria-pressed", String(currentLanguage === "es"));
+      document.querySelector(".landing-art").alt = translate("imageAlt");
+      document.querySelector('meta[name="description"]').content = translate("pageDescription");
+      if (!hikes.length) dialogTitle.textContent = translate("hikeInformation");
+    };
+
+    const setLanguage = (language) => {
+      if (language !== "en" && language !== "es") return;
+      currentLanguage = language;
+      try { localStorage.setItem("hikersLanguage", language); }
+      catch { /* The preference remains active for this page view. */ }
+      updateStaticInterface();
+      if (hikes.length) renderHike(currentHikeIndex);
+    };
+
+    updateStaticInterface();
 
     try {
       const parsedData = JSON.parse(hikeDataElement.textContent);
@@ -2100,9 +2301,9 @@
     } catch (error) {
       const message = document.createElement("p");
       message.className = "data-error";
-      message.textContent = "Hike information is temporarily unavailable.";
+      message.textContent = translate("unavailable");
       hikeContent.replaceChildren(message);
-      hikePosition.textContent = "No hikes available";
+      hikePosition.textContent = translate("noHikes");
       previousButton.disabled = true;
       nextButton.disabled = true;
       previousButton.hidden = true;
@@ -2149,6 +2350,8 @@
     closeButton.addEventListener("click", closeDialog);
     reflectionButton.addEventListener("click", openReflection);
     reflectionCloseButton.addEventListener("click", closeReflection);
+    englishButton.addEventListener("click", () => setLanguage("en"));
+    spanishButton.addEventListener("click", () => setLanguage("es"));
     occurrenceWrap.addEventListener("pointerenter", showOccurrencePopover);
     occurrenceWrap.addEventListener("pointerleave", () => hideOccurrencePopover());
     occurrenceWrap.addEventListener("focusin", showOccurrencePopover);
