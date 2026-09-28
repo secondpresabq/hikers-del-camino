@@ -170,7 +170,7 @@
     .dialog-title--next {
       position: relative;
       display: inline-block;
-      color: #5d96d2;
+      color: #3f6f9c;
     }
 
     .dialog-title--next::before {
@@ -283,11 +283,14 @@
     .hike-dialog .hike-occurrence {
       display: grid;
       justify-items: center;
+      align-content: center;
+      min-width: 2.75rem;
+      min-height: 2.75rem;
       margin: 0;
       padding: 0;
       border: 0;
       background: transparent;
-      color: #cbc4bc;
+      color: #6f6963;
       font-family: inherit;
       font-size: clamp(0.9rem, 2.4vw, 1rem);
       font-weight: 800;
@@ -660,6 +663,8 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       align-self: end;
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       gap: 0.65rem;
       margin: 1rem 0 0;
     }
@@ -675,6 +680,7 @@
 
     .route-option-fact dt {
       margin: 0 0 0.25rem;
+      overflow-wrap: anywhere;
       color: #667060;
       font-size: 0.75rem;
       font-weight: 800;
@@ -795,6 +801,41 @@
     }
 
     @media (max-width: 30rem) {
+      .hike-dialog .dialog-header {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 0.25rem;
+        padding: 0.7rem 0.65rem;
+      }
+
+      .hike-dialog .dialog-title {
+        font-size: 1.05rem;
+      }
+
+      .dialog-title--next::before {
+        inset: -0.2rem -0.3rem;
+        border-width: 2px;
+        opacity: 0.9;
+        transform: rotate(-0.75deg);
+      }
+
+      .hike-dialog .hike-occurrence {
+        font-size: 0.78rem;
+      }
+
+      .hike-dialog .dialog-close {
+        min-width: 4.25rem;
+        padding: 0.55rem 0.7rem;
+        font-size: 0.9rem;
+      }
+
+      .route-option-facts {
+        gap: 0.5rem;
+      }
+
+      .route-option-fact {
+        padding: 0.6rem;
+      }
+
       .reflection-dialog {
         width: 92vw;
         height: 92vh;
@@ -841,14 +882,14 @@
       }
 
       .reflection-verse {
-        font-size: clamp(0.78rem, 2.8vmin, 0.95rem);
-        line-height: 1.3;
+        font-size: clamp(1rem, 3.2vmin, 1.1rem);
+        line-height: 1.4;
       }
 
       .reflection-attribution {
         margin-top: 0.35rem;
-        font-size: clamp(0.7rem, 2.4vmin, 0.82rem);
-        line-height: 1.25;
+        font-size: clamp(0.9rem, 2.7vmin, 1rem);
+        line-height: 1.35;
       }
     }
 
@@ -1710,6 +1751,7 @@
       if (routeOptions) card.append(routeOptions);
       if (afterward) card.append(afterward);
       hikeContent.replaceChildren(card);
+      hikeContent.scrollTop = 0;
       const occurrenceLabel = `${spanishOrdinal(hikeOccurrence(hike, index)).toLowerCase()} vez`;
       const occurrenceWords = occurrenceLabel.split(/\s+/).map((word) => {
         const wordLine = document.createElement("span");
