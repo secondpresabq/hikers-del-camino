@@ -808,16 +808,6 @@
       border-top: 1px solid rgba(95, 104, 92, 0.22);
     }
 
-    .spiritual-language {
-      display: block;
-      margin-bottom: 0.15rem;
-      color: #667060;
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
     .verse-link {
       color: #355d78;
       font-weight: 750;
@@ -1084,8 +1074,8 @@
     >Reflection</button>
 
     <div class="language-switch" id="language-switch" role="group" aria-label="Language / Idioma">
-      <button class="language-option" id="language-en" type="button" aria-pressed="true">EN</button>
-      <button class="language-option" id="language-es" type="button" aria-pressed="false">ES</button>
+      <button class="language-option" id="language-en" type="button" lang="en" aria-label="English" aria-pressed="true">EN</button>
+      <button class="language-option" id="language-es" type="button" lang="es" aria-label="Español" aria-pressed="false">ES</button>
     </div>
 
     <dialog class="hike-dialog" id="hike-info" aria-labelledby="hike-info-title">
@@ -2113,13 +2103,13 @@
       return card;
     };
 
-    const languageLabel = (language) => language === "es" ? "Español" : "English";
-
     const createVerseCard = (verses) => {
       if (!Array.isArray(verses) || !verses.length) return null;
 
       const validVerses = verses.filter((verse) =>
         verse && verse.verseUrl && verse.reference
+      ).sort((first, second) =>
+        Number(second.language === currentLanguage) - Number(first.language === currentLanguage)
       );
       if (!validVerses.length) return null;
 
@@ -2138,11 +2128,6 @@
         const entry = document.createElement("p");
         entry.className = "spiritual-entry";
 
-        const language = document.createElement("span");
-        language.className = "spiritual-language";
-        language.textContent = languageLabel(verse.language);
-        language.lang = verse.language;
-
         const link = document.createElement("a");
         link.className = "verse-link";
         link.href = verse.verseUrl;
@@ -2155,7 +2140,7 @@
         const newTabMessage = messages[verse.language]?.opensNewTab ?? messages.en.opensNewTab;
         link.setAttribute("aria-label", `${linkText}; ${newTabMessage}`);
 
-        entry.append(language, link);
+        entry.append(link);
         content.append(entry);
       });
 
@@ -2166,7 +2151,7 @@
     const createPrayerCard = (prayer) => {
       if (!prayer || typeof prayer !== "object") return null;
 
-      const prayers = ["en", "es"]
+      const prayers = [currentLanguage, currentLanguage === "en" ? "es" : "en"]
         .filter((language) => typeof prayer[language] === "string" && prayer[language].trim())
         .map((language) => ({ language, text: prayer[language].trim() }));
       if (!prayers.length) return null;
@@ -2186,15 +2171,10 @@
         const entry = document.createElement("p");
         entry.className = "spiritual-entry";
 
-        const language = document.createElement("span");
-        language.className = "spiritual-language";
-        language.textContent = languageLabel(languageCode);
-        language.lang = languageCode;
-
         const prayerText = document.createElement("span");
         prayerText.lang = languageCode;
         prayerText.textContent = text;
-        entry.append(language, prayerText);
+        entry.append(prayerText);
         content.append(entry);
       });
 
