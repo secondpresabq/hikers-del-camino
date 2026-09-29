@@ -17,11 +17,15 @@
     },
     "afterward": {
       "@id": "hike:afterward",
-      "@type": "xsd:string"
+      "@container": "@language"
     },
     "directions": {
       "@id": "hike:directions",
-      "@type": "xsd:string"
+      "@container": "@language"
+    },
+    "routeDescription": {
+      "@id": "schema:description",
+      "@container": "@language"
     },
     "bibleVerse": {
       "@id": "hike:bibleVerse",
@@ -61,21 +65,30 @@
     },
     "shade": {
       "@id": "hike:shade",
-      "@type": "xsd:string"
+      "@container": "@language"
     },
     "estimatedDuration": {
       "@id": "hike:estimatedDuration",
       "@type": "xsd:duration"
     },
-    "difficulty": "hike:difficulty"
+    "difficulty": {
+      "@id": "hike:difficulty",
+      "@container": "@language"
+    }
   },
   "@graph": [
     {
       "@id": "#hike-001",
       "@type": "schema:Event",
       "hikeCode": "AA",
-      "afterward": "Hikers picnic at 3 Pinon Place",
-      "directions": "Take I-40 to NM-14 North",
+      "afterward": {
+        "en": "Hikers picnic at 3 Pinon Place",
+        "es": "Picnic del grupo en 3 Pinon Place"
+      },
+      "directions": {
+        "en": "Take I-40 to NM-14 North",
+        "es": "Tome la I-40 hasta la NM-14 y continúe hacia el norte"
+      },
       "bibleVerse": [
         {
           "@type": "hike:BibleGatewayLink",
@@ -118,23 +131,41 @@
           "@type": "hike:HikeOption",
           "optionType": "shorter",
           "schema:name": "Shorter hike",
-          "schema:description": "Up to the ridge and back.",
           "distanceMiles": 2,
           "elevationGainFeet": 500,
-          "shade": "Mostly shaded",
+          "shade": {
+            "en": "Mostly shaded",
+            "es": "Mayormente con sombra"
+          },
           "estimatedDuration": "PT1H30M",
-          "difficulty": "Kinda Moderate"
+          "difficulty": {
+            "en": "Kinda Moderate",
+            "es": "Más o menos moderada"
+          },
+          "routeDescription": {
+            "en": "Up to the ridge and back.",
+            "es": "Hasta la cresta y de regreso."
+          }
         },
         {
           "@type": "hike:HikeOption",
           "optionType": "longer",
           "schema:name": "Longer hike",
-          "schema:description": "Figure eight hike up to the ridge, across the open space, down rocky wagon trail.",
           "distanceMiles": 5.5,
           "elevationGainFeet": 800,
-          "shade": "Mostly shaded",
+          "shade": {
+            "en": "Mostly shaded",
+            "es": "Mayormente con sombra"
+          },
           "estimatedDuration": "PT3H",
-          "difficulty": "Kinda hard"
+          "difficulty": {
+            "en": "Kinda hard",
+            "es": "Algo difícil"
+          },
+          "routeDescription": {
+            "en": "Figure eight hike up to the ridge, across the open space, down rocky wagon trail.",
+            "es": "Ruta en forma de ocho hasta la cresta, a través del espacio abierto y de regreso por el sendero rocoso para carretas."
+          }
         }
       ],
       "date": "2026-09-17",
@@ -144,8 +175,14 @@
       "@id": "#hike-002",
       "@type": "schema:Event",
       "hikeCode": "AB",
-      "afterward": "Beverages and snacks at Great Bear Brewhall",
-      "directions": "Take Tramway to Simms Park Road",
+      "afterward": {
+        "en": "Beverages and snacks at Great Bear Brewhall",
+        "es": "Bebidas y bocadillos en Great Bear Brewhall"
+      },
+      "directions": {
+        "en": "Take Tramway to Simms Park Road",
+        "es": "Tome Tramway Boulevard hasta Simms Park Road"
+      },
       "bibleVerse": [
         {
           "@type": "hike:BibleGatewayLink",
@@ -188,23 +225,41 @@
           "@type": "hike:HikeOption",
           "optionType": "shorter",
           "schema:name": "Shorter hike",
-          "schema:description": "Out to the Domingo Baca trailhead and back.",
           "distanceMiles": 1.5,
           "elevationGainFeet": 100,
-          "shade": "No shade",
+          "shade": {
+            "en": "No shade",
+            "es": "Sin sombra"
+          },
           "estimatedDuration": "PT1H",
-          "difficulty": "Kinda easy"
+          "difficulty": {
+            "en": "Kinda easy",
+            "es": "Más o menos fácil"
+          },
+          "routeDescription": {
+            "en": "Out to the Domingo Baca trailhead and back.",
+            "es": "Hasta el inicio del sendero Domingo Baca y de regreso."
+          }
         },
         {
           "@type": "hike:HikeOption",
           "optionType": "longer",
           "schema:name": "Longer hike",
-          "schema:description": "Up to the TWA crash sight and back.",
           "distanceMiles": 6,
           "elevationGainFeet": 1500,
-          "shade": "No shade",
+          "shade": {
+            "en": "No shade",
+            "es": "Sin sombra"
+          },
           "estimatedDuration": "PT6H",
-          "difficulty": "Pretty hard, actually"
+          "difficulty": {
+            "en": "Pretty hard, actually",
+            "es": "Bastante difícil, la verdad"
+          },
+          "routeDescription": {
+            "en": "Up to the TWA crash sight and back.",
+            "es": "Hasta el sitio del accidente aéreo de TWA y de regreso."
+          }
         }
       ],
       "date": "2026-09-28",
@@ -215,7 +270,10 @@
       "@type": "schema:Event",
       "hikeCode": "AC",
       "afterward": null,
-      "directions": "Take I-40 East to Tijeras",
+      "directions": {
+        "en": "Take I-40 East to Tijeras",
+        "es": "Tome la I-40 hacia el este hasta Tijeras"
+      },
       "bibleVerse": [
         {
           "@type": "hike:BibleGatewayLink",
@@ -259,23 +317,41 @@
           "@type": "hike:HikeOption",
           "optionType": "shorter",
           "schema:name": "Shorter hike",
-          "schema:description": "Into the Otero Canyon and back.",
           "distanceMiles": 1.5,
           "elevationGainFeet": 200,
-          "shade": "Partial shade",
+          "shade": {
+            "en": "Partial shade",
+            "es": "Sombra parcial"
+          },
           "estimatedDuration": "PT1H",
-          "difficulty": "Tricky here and there"
+          "difficulty": {
+            "en": "Tricky here and there",
+            "es": "Con algunos tramos complicados"
+          },
+          "routeDescription": {
+            "en": "Into the Otero Canyon and back.",
+            "es": "Hacia Otero Canyon y de regreso."
+          }
         },
         {
           "@type": "hike:HikeOption",
           "optionType": "longer",
           "schema:name": "Longer hike",
-          "schema:description": "Circle trip through Otero Canyon to Air Force boundary, up the hillside, back down Blue Ribbon trail.",
           "distanceMiles": 5,
           "elevationGainFeet": 600,
-          "shade": "Partial shade",
+          "shade": {
+            "en": "Partial shade",
+            "es": "Sombra parcial"
+          },
           "estimatedDuration": "PT2H30M",
-          "difficulty": "Sordof moderate-ish"
+          "difficulty": {
+            "en": "Sordof moderate-ish",
+            "es": "Más o menos moderada"
+          },
+          "routeDescription": {
+            "en": "Circle trip through Otero Canyon to Air Force boundary, up the hillside, back down Blue Ribbon trail.",
+            "es": "Ruta circular por Otero Canyon hasta el límite de la Base de la Fuerza Aérea, subiendo por la ladera y regresando por el sendero Blue Ribbon."
+          }
         }
       ],
       "date": "2026-11-14",
@@ -286,7 +362,10 @@
       "@type": "schema:Event",
       "hikeCode": "AD",
       "afterward": null,
-      "directions": "Take Central Avenue east past Tramway, look for parking lot on the right-hand side of the road",
+      "directions": {
+        "en": "Take Central Avenue east past Tramway, look for parking lot on the right-hand side of the road",
+        "es": "Tome Central Avenue hacia el este, pase Tramway Boulevard y busque el estacionamiento al lado derecho de la carretera"
+      },
       "bibleVerse": [
         {
           "@type": "hike:BibleGatewayLink",
@@ -329,23 +408,41 @@
           "@type": "hike:HikeOption",
           "optionType": "shorter",
           "schema:name": "Shorter hike",
-          "schema:description": "Out to the beginning of the climb.",
           "distanceMiles": 1.5,
           "elevationGainFeet": 10,
-          "shade": "Little shade",
+          "shade": {
+            "en": "Little shade",
+            "es": "Poca sombra"
+          },
           "estimatedDuration": "PT1H",
-          "difficulty": "Kinda easy"
+          "difficulty": {
+            "en": "Kinda easy",
+            "es": "Más o menos fácil"
+          },
+          "routeDescription": {
+            "en": "Out to the beginning of the climb.",
+            "es": "Hasta el inicio de la subida."
+          }
         },
         {
           "@type": "hike:HikeOption",
           "optionType": "longer",
           "schema:name": "Longer hike",
-          "schema:description": "Circle hike up around and back.",
           "distanceMiles": 3,
           "elevationGainFeet": 500,
-          "shade": "Little shade",
+          "shade": {
+            "en": "Little shade",
+            "es": "Poca sombra"
+          },
           "estimatedDuration": "PT2H",
-          "difficulty": "Kinda moderate"
+          "difficulty": {
+            "en": "Kinda moderate",
+            "es": "Más o menos moderada"
+          },
+          "routeDescription": {
+            "en": "Circle hike up around and back.",
+            "es": "Ruta circular que sube, rodea el área y regresa."
+          }
         }
       ],
       "date": "2026-12-12",
@@ -356,7 +453,10 @@
       "@type": "schema:Event",
       "hikeCode": "AA",
       "afterward": null,
-      "directions": "Take I-40 East to Tijeras, then NM-14 North",
+      "directions": {
+        "en": "Take I-40 East to Tijeras, then NM-14 North",
+        "es": "Tome la I-40 hacia el este hasta Tijeras y luego la NM-14 hacia el norte"
+      },
       "bibleVerse": [
         {
           "@type": "hike:BibleGatewayLink",
@@ -399,23 +499,41 @@
           "@type": "hike:HikeOption",
           "optionType": "shorter",
           "schema:name": "Shorter hike",
-          "schema:description": "Up to the ridge and back.",
           "distanceMiles": 2,
           "elevationGainFeet": 500,
-          "shade": "Mostly shaded",
+          "shade": {
+            "en": "Mostly shaded",
+            "es": "Mayormente con sombra"
+          },
           "estimatedDuration": "PT1H30M",
-          "difficulty": "Kinda Moderate"
+          "difficulty": {
+            "en": "Kinda Moderate",
+            "es": "Más o menos moderada"
+          },
+          "routeDescription": {
+            "en": "Up to the ridge and back.",
+            "es": "Hasta la cresta y de regreso."
+          }
         },
         {
           "@type": "hike:HikeOption",
           "optionType": "longer",
           "schema:name": "Longer hike",
-          "schema:description": "Figure eight hike up to the ridge, across the open space, down rocky wagon trail.",
           "distanceMiles": 5.5,
           "elevationGainFeet": 800,
-          "shade": "Mostly shaded",
+          "shade": {
+            "en": "Mostly shaded",
+            "es": "Mayormente con sombra"
+          },
           "estimatedDuration": "PT3H",
-          "difficulty": "Kinda hard"
+          "difficulty": {
+            "en": "Kinda hard",
+            "es": "Algo difícil"
+          },
+          "routeDescription": {
+            "en": "Figure eight hike up to the ridge, across the open space, down rocky wagon trail.",
+            "es": "Ruta en forma de ocho hasta la cresta, a través del espacio abierto y de regreso por el sendero rocoso para carretas."
+          }
         }
       ],
       "date": "2027-04-17",
